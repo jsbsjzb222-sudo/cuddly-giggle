@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Умные Игры</title>
+    <meta name="description" content="Умные Игры - коллекция мини-игр: судоку, крестики-нолики, шахматы и другие.">
+    <meta name="theme-color" content="#667eea">
+    <title>Умные Игры - Мини-игры</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         :root {
@@ -39,12 +46,13 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            color: var(--text);
         }
 
         #app {
@@ -75,6 +83,7 @@
             font-size: 18px;
             font-weight: 600;
             flex: 1;
+            text-align: center;
         }
 
         .back-btn {
@@ -89,11 +98,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.2s;
+            transition: background 0.2s ease;
+            padding: 0;
         }
 
         .back-btn:hover {
             background: rgba(255, 255, 255, 0.3);
+        }
+
+        .back-btn:focus {
+            outline: 2px solid rgba(255, 255, 255, 0.5);
+            outline-offset: 2px;
         }
 
         .back-btn.hidden {
@@ -129,8 +144,12 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         /* Main Menu */
@@ -153,12 +172,20 @@
             padding: 14px;
             border-radius: 12px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 8px;
             text-align: center;
+            font-size: inherit;
+            color: inherit;
+        }
+
+        .menu-item:hover,
+        .menu-item:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .menu-item:active {
@@ -180,6 +207,8 @@
             font-weight: 600;
             color: var(--text-light);
             margin: 8px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .games-grid {
@@ -194,8 +223,18 @@
             padding: 12px;
             border-radius: 10px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-item:hover,
+        .game-item:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .game-item:active {
@@ -302,11 +341,18 @@
         .toggle-switch {
             width: 44px;
             height: 24px;
-            background: #ccc;
+            background: #cccccc;
             border-radius: 12px;
             cursor: pointer;
             position: relative;
-            transition: background 0.3s;
+            transition: background 0.3s ease;
+            border: none;
+            padding: 0;
+        }
+
+        .toggle-switch:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
         }
 
         .toggle-switch.active {
@@ -322,7 +368,7 @@
             border-radius: 50%;
             top: 2px;
             left: 2px;
-            transition: left 0.3s;
+            transition: left 0.3s ease;
         }
 
         .toggle-switch.active::after {
@@ -343,7 +389,13 @@
             cursor: pointer;
             font-size: 12px;
             font-weight: 600;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            color: var(--text);
+        }
+
+        .theme-btn:hover,
+        .theme-btn:focus {
+            border-color: var(--primary);
         }
 
         .theme-btn.selected {
@@ -373,6 +425,7 @@
         .setting-slider input {
             flex: 1;
             cursor: pointer;
+            accent-color: var(--primary);
         }
 
         .setting-value {
@@ -402,9 +455,15 @@
             border-radius: 20px;
             cursor: pointer;
             white-space: nowrap;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             font-size: 13px;
             font-weight: 600;
+            color: var(--text);
+        }
+
+        .shop-tab:hover,
+        .shop-tab:focus {
+            background: var(--border);
         }
 
         .shop-tab.active {
@@ -475,39 +534,75 @@
         }
 
         @keyframes bgSunset {
-            0% { background: linear-gradient(135deg, #FF6B6B 0%, #FFA500 50%, #FFD700 100%); }
-            50% { background: linear-gradient(135deg, #FF8E53 0%, #FFA500 50%, #FFD93D 100%); }
-            100% { background: linear-gradient(135deg, #FF6B6B 0%, #FFA500 50%, #FFD700 100%); }
+            0% {
+                background: linear-gradient(135deg, #FF6B6B 0%, #FFA500 50%, #FFD700 100%);
+            }
+            50% {
+                background: linear-gradient(135deg, #FF8E53 0%, #FFA500 50%, #FFD93D 100%);
+            }
+            100% {
+                background: linear-gradient(135deg, #FF6B6B 0%, #FFA500 50%, #FFD700 100%);
+            }
         }
 
         @keyframes bgOcean {
-            0% { background: linear-gradient(135deg, #0074E4 0%, #00D4FF 50%, #A8EDEA 100%); }
-            50% { background: linear-gradient(135deg, #0099E4 0%, #00BFFF 50%, #87CEEB 100%); }
-            100% { background: linear-gradient(135deg, #0074E4 0%, #00D4FF 50%, #A8EDEA 100%); }
+            0% {
+                background: linear-gradient(135deg, #0074E4 0%, #00D4FF 50%, #A8EDEA 100%);
+            }
+            50% {
+                background: linear-gradient(135deg, #0099E4 0%, #00BFFF 50%, #87CEEB 100%);
+            }
+            100% {
+                background: linear-gradient(135deg, #0074E4 0%, #00D4FF 50%, #A8EDEA 100%);
+            }
         }
 
         @keyframes bgForest {
-            0% { background: linear-gradient(135deg, #134E5E 0%, #71B280 50%, #A8E6CF 100%); }
-            50% { background: linear-gradient(135deg, #1A6B5E 0%, #7AC87F 50%, #B8F3D8 100%); }
-            100% { background: linear-gradient(135deg, #134E5E 0%, #71B280 50%, #A8E6CF 100%); }
+            0% {
+                background: linear-gradient(135deg, #134E5E 0%, #71B280 50%, #A8E6CF 100%);
+            }
+            50% {
+                background: linear-gradient(135deg, #1A6B5E 0%, #7AC87F 50%, #B8F3D8 100%);
+            }
+            100% {
+                background: linear-gradient(135deg, #134E5E 0%, #71B280 50%, #A8E6CF 100%);
+            }
         }
 
         @keyframes bgAurora {
-            0% { background: linear-gradient(135deg, #11998E 0%, #38EF7D 50%, #C4EC67 100%); }
-            50% { background: linear-gradient(135deg, #00C9FF 0%, #92FE9D 50%, #ACFF67 100%); }
-            100% { background: linear-gradient(135deg, #11998E 0%, #38EF7D 50%, #C4EC67 100%); }
+            0% {
+                background: linear-gradient(135deg, #11998E 0%, #38EF7D 50%, #C4EC67 100%);
+            }
+            50% {
+                background: linear-gradient(135deg, #00C9FF 0%, #92FE9D 50%, #ACFF67 100%);
+            }
+            100% {
+                background: linear-gradient(135deg, #11998E 0%, #38EF7D 50%, #C4EC67 100%);
+            }
         }
 
         @keyframes bgLava {
-            0% { background: linear-gradient(135deg, #FF6B00 0%, #FF0084 50%, #7F00FF 100%); }
-            50% { background: linear-gradient(135deg, #FF8533 0%, #FF33CC 50%, #9D33FF 100%); }
-            100% { background: linear-gradient(135deg, #FF6B00 0%, #FF0084 50%, #7F00FF 100%); }
+            0% {
+                background: linear-gradient(135deg, #FF6B00 0%, #FF0084 50%, #7F00FF 100%);
+            }
+            50% {
+                background: linear-gradient(135deg, #FF8533 0%, #FF33CC 50%, #9D33FF 100%);
+            }
+            100% {
+                background: linear-gradient(135deg, #FF6B00 0%, #FF0084 50%, #7F00FF 100%);
+            }
         }
 
         @keyframes bgGalaxy {
-            0% { background: linear-gradient(135deg, #1A0033 0%, #4D0066 50%, #FF1493 100%); }
-            50% { background: linear-gradient(135deg, #2D0052 0%, #6D0099 50%, #FF69B4 100%); }
-            100% { background: linear-gradient(135deg, #1A0033 0%, #4D0066 50%, #FF1493 100%); }
+            0% {
+                background: linear-gradient(135deg, #1A0033 0%, #4D0066 50%, #FF1493 100%);
+            }
+            50% {
+                background: linear-gradient(135deg, #2D0052 0%, #6D0099 50%, #FF69B4 100%);
+            }
+            100% {
+                background: linear-gradient(135deg, #1A0033 0%, #4D0066 50%, #FF1493 100%);
+            }
         }
 
         .item-info {
@@ -535,8 +630,14 @@
             cursor: pointer;
             font-size: 12px;
             font-weight: 600;
-            transition: transform 0.2s;
+            transition: transform 0.2s ease;
             flex-shrink: 0;
+        }
+
+        .buy-btn:hover,
+        .buy-btn:focus {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .buy-btn:active {
@@ -587,7 +688,13 @@
             white-space: nowrap;
             font-size: 13px;
             font-weight: 600;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            color: var(--text);
+        }
+
+        .rating-tab:hover,
+        .rating-tab:focus {
+            background: var(--border);
         }
 
         .rating-tab.active {
@@ -619,9 +726,17 @@
             text-align: center;
         }
 
-        .rating-position.gold { color: #ffd700; }
-        .rating-position.silver { color: #c0c0c0; }
-        .rating-position.bronze { color: #cd7f32; }
+        .rating-position.gold {
+            color: #ffd700;
+        }
+
+        .rating-position.silver {
+            color: #c0c0c0;
+        }
+
+        .rating-position.bronze {
+            color: #cd7f32;
+        }
 
         .rating-info {
             flex: 1;
@@ -704,7 +819,7 @@
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.2s ease;
         }
 
         .modal-btn-primary {
@@ -717,56 +832,77 @@
             color: var(--text);
         }
 
+        .modal-btn:hover,
+        .modal-btn:focus {
+            transform: translateY(-1px);
+        }
+
         .modal-btn:active {
             transform: scale(0.95);
         }
 
         body.vibrant-theme .menu-item {
-            background: #fff;
+            background: #ffffff;
             border: 2px solid var(--border);
         }
 
         body.vibrant-theme .stat-box {
             background: linear-gradient(135deg, #ff006e 0%, #ffb703 100%);
         }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media (max-height: 600px) {
+            .profile-stats {
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                gap: 8px;
+            }
+        }
     </style>
 </head>
 <body>
     <div id="app">
         <div class="header">
-            <button class="back-btn hidden" id="backBtn">←</button>
-            <div class="header-title" id="headerTitle">Умные Игры</div>
-            <div class="coin-display">
-                <span>💰</span>
+            <button class="back-btn hidden" id="backBtn" aria-label="Назад">←</button>
+            <h1 class="header-title" id="headerTitle">Умные Игры</h1>
+            <div class="coin-display" aria-live="polite">
+                <span aria-label="Коины">💰</span>
                 <span id="shopCoins">0</span>
             </div>
         </div>
 
-        <div class="container">
+        <main class="container">
             <!-- Main Menu -->
             <div id="mainMenuScreen" class="screen active">
                 <div class="main-menu">
-                    <div class="menu-grid">
-                        <div class="menu-item" onclick="app.showScreen('profileScreen')">
-                            <div class="icon">👤</div>
+                    <div class="menu-grid" role="navigation" aria-label="Главное меню">
+                        <button class="menu-item" onclick="app.showScreen('profileScreen')" aria-label="Профиль">
+                            <div class="icon" aria-hidden="true">👤</div>
                             <div class="label">Профиль</div>
-                        </div>
-                        <div class="menu-item" onclick="app.showScreen('ratingsScreen')">
-                            <div class="icon">🏆</div>
+                        </button>
+                        <button class="menu-item" onclick="app.showScreen('ratingsScreen')" aria-label="Рейтинги">
+                            <div class="icon" aria-hidden="true">🏆</div>
                             <div class="label">Рейтинги</div>
-                        </div>
-                        <div class="menu-item" onclick="app.showScreen('shopScreen')">
-                            <div class="icon">🛍️</div>
+                        </button>
+                        <button class="menu-item" onclick="app.showScreen('shopScreen')" aria-label="Магазин">
+                            <div class="icon" aria-hidden="true">🛍️</div>
                             <div class="label">Магазин</div>
-                        </div>
-                        <div class="menu-item" onclick="app.showScreen('settingsScreen')">
-                            <div class="icon">⚙️</div>
+                        </button>
+                        <button class="menu-item" onclick="app.showScreen('settingsScreen')" aria-label="Настройки">
+                            <div class="icon" aria-hidden="true">⚙️</div>
                             <div class="label">Настройки</div>
-                        </div>
+                        </button>
                     </div>
 
-                    <div class="games-title">Мини-игры</div>
-                    <div class="games-grid" id="gamesContainer"></div>
+                    <h2 class="games-title">Мини-игры</h2>
+                    <div class="games-grid" id="gamesContainer" role="region" aria-label="Доступные игры"></div>
                 </div>
             </div>
 
@@ -774,8 +910,8 @@
             <div id="profileScreen" class="screen">
                 <div class="profile-content">
                     <div class="profile-header">
-                        <div class="profile-avatar">🧠</div>
-                        <div class="profile-name" id="profileName">Игрок</div>
+                        <div class="profile-avatar" role="img" aria-label="Аватар профиля">🧠</div>
+                        <h2 class="profile-name" id="profileName">Игрок</h2>
                     </div>
                     <div class="profile-stats">
                         <div class="stat-box">
@@ -802,16 +938,16 @@
             <div id="settingsScreen" class="screen">
                 <div class="settings-content">
                     <div class="setting-group">
-                        <div class="setting-title">🔊 Звук</div>
+                        <h3 class="setting-title">🔊 Звук</h3>
                         <div class="setting-item">
-                            <span>Включить звук</span>
-                            <div class="toggle-switch active" onclick="app.toggleSound(this)"></div>
+                            <label for="soundToggle">Включить звук</label>
+                            <button class="toggle-switch active" id="soundToggle" role="switch" aria-checked="true" onclick="app.toggleSound(this)"></button>
                         </div>
                     </div>
 
                     <div class="setting-group">
-                        <div class="setting-title">🎨 Тема</div>
-                        <div class="theme-options">
+                        <h3 class="setting-title">🎨 Тема</h3>
+                        <div class="theme-options" role="group" aria-label="Выбор темы">
                             <button class="theme-btn selected" onclick="app.setTheme('light')">Светлая</button>
                             <button class="theme-btn" onclick="app.setTheme('dark')">Тёмная</button>
                             <button class="theme-btn" onclick="app.setTheme('vibrant')">Яркая</button>
@@ -819,16 +955,16 @@
                     </div>
 
                     <div class="setting-group">
-                        <div class="setting-title">🎮 Параметры игр</div>
+                        <h3 class="setting-title">🎮 Параметры игр</h3>
                         <div class="game-settings">
                             <div class="setting-slider">
-                                <label>Сложность</label>
-                                <input type="range" min="1" max="3" value="2" id="difficultySlider" onchange="app.updateSetting('difficulty', this.value)">
+                                <label for="difficultySlider">Сложность</label>
+                                <input type="range" id="difficultySlider" min="1" max="3" value="2" onchange="app.updateSetting('difficulty', this.value)" aria-label="Уровень сложности">
                                 <div class="setting-value" id="difficultyValue">2</div>
                             </div>
                             <div class="setting-slider">
-                                <label>Размер поля</label>
-                                <input type="range" min="8" max="20" value="10" id="boardSizeSlider" onchange="app.updateSetting('boardSize', this.value)">
+                                <label for="boardSizeSlider">Размер поля</label>
+                                <input type="range" id="boardSizeSlider" min="8" max="20" value="10" onchange="app.updateSetting('boardSize', this.value)" aria-label="Размер игрового поля">
                                 <div class="setting-value" id="boardSizeValue">10</div>
                             </div>
                         </div>
@@ -839,34 +975,34 @@
             <!-- Shop -->
             <div id="shopScreen" class="screen">
                 <div class="shop-content">
-                    <div class="shop-tabs" id="shopTabsContainer"></div>
-                    <div class="shop-items" id="shopItemsContainer"></div>
+                    <div class="shop-tabs" id="shopTabsContainer" role="tablist"></div>
+                    <div class="shop-items" id="shopItemsContainer" role="region" aria-label="Товары в магазине"></div>
                 </div>
             </div>
 
             <!-- Ratings -->
             <div id="ratingsScreen" class="screen">
                 <div class="ratings-content">
-                    <div class="rating-tabs" id="ratingTabsContainer"></div>
-                    <div class="rating-list" id="ratingsListContainer"></div>
+                    <div class="rating-tabs" id="ratingTabsContainer" role="tablist"></div>
+                    <div class="rating-list" id="ratingsListContainer" role="region" aria-label="Рейтинги"></div>
                 </div>
             </div>
 
             <!-- Coming Soon -->
             <div id="comingSoonScreen" class="screen">
                 <div class="coming-soon">
-                    <div class="coming-soon-icon">⏳</div>
-                    <div class="coming-soon-text">Скоро...</div>
+                    <div class="coming-soon-icon" aria-hidden="true">⏳</div>
+                    <h2 class="coming-soon-text">Скоро...</h2>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
 
-    <div id="modal" class="modal">
+    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
-            <div class="modal-icon" id="modalIcon">🎉</div>
-            <div class="modal-title" id="modalTitle">Заголовок</div>
-            <div class="modal-text" id="modalText">Описание</div>
+            <div class="modal-icon" id="modalIcon" aria-hidden="true">🎉</div>
+            <h2 class="modal-title" id="modalTitle">Заголовок</h2>
+            <p class="modal-text" id="modalText">Описание</p>
             <div class="modal-buttons">
                 <button class="modal-btn modal-btn-primary" onclick="app.closeModal()">ОК</button>
             </div>
@@ -874,6 +1010,8 @@
     </div>
 
     <script>
+        'use strict';
+
         const app = {
             state: {
                 soundEnabled: true,
@@ -923,54 +1061,68 @@
 
             renderGames() {
                 const container = document.getElementById('gamesContainer');
+                if (!container) return;
+                
                 container.innerHTML = this.games.map(game => `
-                    <div class="game-item" onclick="app.playGame('${game.id}')">
-                        <div class="icon">${game.icon}</div>
+                    <button class="game-item" onclick="app.playGame('${game.id}')" aria-label="Игра ${game.name}">
+                        <div class="icon" aria-hidden="true">${game.icon}</div>
                         <div class="name">${game.name}</div>
-                    </div>
+                    </button>
                 `).join('');
             },
 
             renderShopTabs() {
                 const container = document.getElementById('shopTabsContainer');
+                if (!container) return;
+                
                 container.innerHTML = `
-                    <button class="shop-tab active" onclick="app.switchShopTab('avatars')">Аватары</button>
-                    <button class="shop-tab" onclick="app.switchShopTab('backgrounds')">Фоны</button>
-                    <button class="shop-tab" onclick="app.switchShopTab('rewards')">Призы</button>
+                    <button class="shop-tab active" onclick="app.switchShopTab('avatars')" role="tab" aria-selected="true">Аватары</button>
+                    <button class="shop-tab" onclick="app.switchShopTab('backgrounds')" role="tab" aria-selected="false">Фоны</button>
+                    <button class="shop-tab" onclick="app.switchShopTab('rewards')" role="tab" aria-selected="false">Призы</button>
                 `;
                 this.renderShopItems('avatars');
             },
 
             switchShopTab(tab) {
-                document.querySelectorAll('.shop-tab').forEach(el => el.classList.remove('active'));
-                event.target.classList.add('active');
+                const tabs = document.querySelectorAll('.shop-tab');
+                tabs.forEach(el => {
+                    el.classList.remove('active');
+                    el.setAttribute('aria-selected', 'false');
+                });
+                
+                if (event && event.target) {
+                    event.target.classList.add('active');
+                    event.target.setAttribute('aria-selected', 'true');
+                }
+                
                 this.renderShopItems(tab);
             },
 
             renderShopItems(tab) {
                 const container = document.getElementById('shopItemsContainer');
+                if (!container) return;
                 
                 if (tab === 'rewards') {
                     container.innerHTML = `
                         <div class="coming-soon" style="min-height: auto; padding: 40px 20px;">
-                            <div class="coming-soon-icon">⏳</div>
-                            <div class="coming-soon-text">Скоро...</div>
+                            <div class="coming-soon-icon" aria-hidden="true">⏳</div>
+                            <p class="coming-soon-text">Скоро...</p>
                         </div>
                     `;
                     return;
                 }
 
                 const items = this.shop[tab];
-                container.innerHTML = items.map((item, idx) => {
+                container.innerHTML = items.map((item) => {
                     if (tab === 'backgrounds') {
                         return `
                             <div class="shop-item">
-                                <div class="background-preview ${item.class}"></div>
+                                <div class="background-preview ${item.class}" aria-hidden="true"></div>
                                 <div class="item-info">
-                                    <div class="item-name">${item.name}</div>
-                                    <div class="item-desc">${item.desc}</div>
+                                    <div class="item-name">${this.escapeHtml(item.name)}</div>
+                                    <div class="item-desc">${this.escapeHtml(item.desc)}</div>
                                 </div>
-                                <button class="buy-btn" onclick="app.buyItem('${item.name}', ${item.price})">
+                                <button class="buy-btn" onclick="app.buyItem('${this.escapeHtml(item.name)}', ${item.price})" aria-label="Купить ${item.name} за ${item.price} коинов">
                                     💰 ${item.price}
                                 </button>
                             </div>
@@ -978,18 +1130,24 @@
                     } else {
                         return `
                             <div class="shop-item">
-                                <div class="item-icon">${item.icon}</div>
+                                <div class="item-icon" aria-hidden="true">${item.icon}</div>
                                 <div class="item-info">
-                                    <div class="item-name">${item.name}</div>
-                                    <div class="item-desc">${item.desc}</div>
+                                    <div class="item-name">${this.escapeHtml(item.name)}</div>
+                                    <div class="item-desc">${this.escapeHtml(item.desc)}</div>
                                 </div>
-                                <button class="buy-btn" onclick="app.buyItem('${item.name}', ${item.price})">
+                                <button class="buy-btn" onclick="app.buyItem('${this.escapeHtml(item.name)}', ${item.price})" aria-label="Купить ${item.name} за ${item.price} коинов">
                                     💰 ${item.price}
                                 </button>
                             </div>
                         `;
                     }
                 }).join('');
+            },
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
             },
 
             buyItem(name, price) {
@@ -1007,14 +1165,20 @@
             },
 
             showScreen(screenId) {
-                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-                document.getElementById(screenId).classList.add('active');
+                const screens = document.querySelectorAll('.screen');
+                screens.forEach(s => s.classList.remove('active'));
+                
+                const targetScreen = document.getElementById(screenId);
+                if (targetScreen) {
+                    targetScreen.classList.add('active');
+                }
                 
                 const backBtn = document.getElementById('backBtn');
-                backBtn.classList.toggle('hidden', screenId === 'mainMenuScreen');
-                
-                if (screenId !== 'mainMenuScreen') {
-                    backBtn.onclick = () => this.showScreen('mainMenuScreen');
+                if (backBtn) {
+                    backBtn.classList.toggle('hidden', screenId === 'mainMenuScreen');
+                    if (screenId !== 'mainMenuScreen') {
+                        backBtn.onclick = () => this.showScreen('mainMenuScreen');
+                    }
                 }
 
                 this.updateHeaderTitle(screenId);
@@ -1028,7 +1192,11 @@
                     shopScreen: 'Магазин',
                     ratingsScreen: 'Рейтинги'
                 };
-                document.getElementById('headerTitle').textContent = titles[screenId] || 'Умные Игры';
+                
+                const title = document.getElementById('headerTitle');
+                if (title) {
+                    title.textContent = titles[screenId] || 'Умные Игры';
+                }
             },
 
             setTheme(theme) {
@@ -1042,7 +1210,9 @@
                 }
 
                 document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('selected'));
-                event.target.classList.add('selected');
+                if (event && event.target) {
+                    event.target.classList.add('selected');
+                }
 
                 localStorage.setItem('theme', theme);
             },
@@ -1050,42 +1220,66 @@
             loadTheme() {
                 const saved = localStorage.getItem('theme') || 'light';
                 if (saved !== 'light') {
-                    this.setTheme(saved);
+                    const btn = document.querySelector(`.theme-btn[onclick="app.setTheme('${saved}')"]`);
+                    if (btn) {
+                        btn.click();
+                    }
                 }
             },
 
             toggleSound(el) {
                 this.state.soundEnabled = !this.state.soundEnabled;
                 el.classList.toggle('active');
+                el.setAttribute('aria-checked', this.state.soundEnabled);
             },
 
             updateSetting(key, value) {
-                this.state[key] = parseInt(value);
-                document.getElementById(key + 'Value').textContent = value;
+                this.state[key] = parseInt(value, 10);
+                const valueEl = document.getElementById(key + 'Value');
+                if (valueEl) {
+                    valueEl.textContent = value;
+                }
                 localStorage.setItem('gameSetting_' + key, value);
             },
 
             updateUI() {
-                document.getElementById('shopCoins').textContent = this.state.shopCoins;
-                document.getElementById('profileCoins').textContent = this.state.profileCoins;
-                document.getElementById('profileRating').textContent = this.state.profileRating;
-                document.getElementById('profileWins').textContent = this.state.profileWins;
-                document.getElementById('profileLosses').textContent = this.state.profileLosses;
+                const shopCoinsEl = document.getElementById('shopCoins');
+                if (shopCoinsEl) shopCoinsEl.textContent = this.state.shopCoins;
+                
+                const profileCoinsEl = document.getElementById('profileCoins');
+                if (profileCoinsEl) profileCoinsEl.textContent = this.state.profileCoins;
+                
+                const profileRatingEl = document.getElementById('profileRating');
+                if (profileRatingEl) profileRatingEl.textContent = this.state.profileRating;
+                
+                const profileWinsEl = document.getElementById('profileWins');
+                if (profileWinsEl) profileWinsEl.textContent = this.state.profileWins;
+                
+                const profileLossesEl = document.getElementById('profileLosses');
+                if (profileLossesEl) profileLossesEl.textContent = this.state.profileLosses;
             },
 
             showModal(icon, title, text) {
-                document.getElementById('modalIcon').textContent = icon;
-                document.getElementById('modalTitle').textContent = title;
-                document.getElementById('modalText').textContent = text;
-                document.getElementById('modal').classList.add('active');
+                const modalIcon = document.getElementById('modalIcon');
+                const modalTitle = document.getElementById('modalTitle');
+                const modalText = document.getElementById('modalText');
+                const modal = document.getElementById('modal');
+                
+                if (modalIcon) modalIcon.textContent = icon;
+                if (modalTitle) modalTitle.textContent = title;
+                if (modalText) modalText.textContent = text;
+                if (modal) modal.classList.add('active');
             },
 
             closeModal() {
-                document.getElementById('modal').classList.remove('active');
+                const modal = document.getElementById('modal');
+                if (modal) modal.classList.remove('active');
             }
         };
 
-        app.init();
+        document.addEventListener('DOMContentLoaded', function() {
+            app.init();
+        });
     </script>
 </body>
 </html>
