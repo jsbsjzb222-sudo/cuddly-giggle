@@ -442,6 +442,74 @@
             flex-shrink: 0;
         }
 
+        .background-preview {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            flex-shrink: 0;
+            border: 2px solid var(--border);
+        }
+
+        .bg-sunset {
+            animation: bgSunset 6s ease infinite;
+        }
+
+        .bg-ocean {
+            animation: bgOcean 6s ease infinite;
+        }
+
+        .bg-forest {
+            animation: bgForest 6s ease infinite;
+        }
+
+        .bg-aurora {
+            animation: bgAurora 6s ease infinite;
+        }
+
+        .bg-lava {
+            animation: bgLava 6s ease infinite;
+        }
+
+        .bg-galaxy {
+            animation: bgGalaxy 6s ease infinite;
+        }
+
+        @keyframes bgSunset {
+            0% { background: linear-gradient(135deg, #FF6B6B 0%, #FFA500 50%, #FFD700 100%); }
+            50% { background: linear-gradient(135deg, #FF8E53 0%, #FFA500 50%, #FFD93D 100%); }
+            100% { background: linear-gradient(135deg, #FF6B6B 0%, #FFA500 50%, #FFD700 100%); }
+        }
+
+        @keyframes bgOcean {
+            0% { background: linear-gradient(135deg, #0074E4 0%, #00D4FF 50%, #A8EDEA 100%); }
+            50% { background: linear-gradient(135deg, #0099E4 0%, #00BFFF 50%, #87CEEB 100%); }
+            100% { background: linear-gradient(135deg, #0074E4 0%, #00D4FF 50%, #A8EDEA 100%); }
+        }
+
+        @keyframes bgForest {
+            0% { background: linear-gradient(135deg, #134E5E 0%, #71B280 50%, #A8E6CF 100%); }
+            50% { background: linear-gradient(135deg, #1A6B5E 0%, #7AC87F 50%, #B8F3D8 100%); }
+            100% { background: linear-gradient(135deg, #134E5E 0%, #71B280 50%, #A8E6CF 100%); }
+        }
+
+        @keyframes bgAurora {
+            0% { background: linear-gradient(135deg, #11998E 0%, #38EF7D 50%, #C4EC67 100%); }
+            50% { background: linear-gradient(135deg, #00C9FF 0%, #92FE9D 50%, #ACFF67 100%); }
+            100% { background: linear-gradient(135deg, #11998E 0%, #38EF7D 50%, #C4EC67 100%); }
+        }
+
+        @keyframes bgLava {
+            0% { background: linear-gradient(135deg, #FF6B00 0%, #FF0084 50%, #7F00FF 100%); }
+            50% { background: linear-gradient(135deg, #FF8533 0%, #FF33CC 50%, #9D33FF 100%); }
+            100% { background: linear-gradient(135deg, #FF6B00 0%, #FF0084 50%, #7F00FF 100%); }
+        }
+
+        @keyframes bgGalaxy {
+            0% { background: linear-gradient(135deg, #1A0033 0%, #4D0066 50%, #FF1493 100%); }
+            50% { background: linear-gradient(135deg, #2D0052 0%, #6D0099 50%, #FF69B4 100%); }
+            100% { background: linear-gradient(135deg, #1A0033 0%, #4D0066 50%, #FF1493 100%); }
+        }
+
         .item-info {
             flex: 1;
         }
@@ -835,11 +903,13 @@
                     { name: 'Звезда', icon: '⭐', price: 200, desc: 'Звёздный аватар' },
                     { name: 'Ракета', icon: '🚀', price: 250, desc: 'Суперскоростной' }
                 ],
-                themes: [
-                    { name: 'Неон', icon: '💡', price: 180, desc: 'Яркая неоновая тема' },
-                    { name: 'Космос', icon: '🌌', price: 200, desc: 'Космическая тема' },
-                    { name: 'Природа', icon: '🌿', price: 150, desc: 'Естественные цвета' },
-                    { name: 'Киберпанк', icon: '🤖', price: 250, desc: 'Футуристичная тема' }
+                backgrounds: [
+                    { name: 'Закат', class: 'bg-sunset', price: 180, desc: 'Переливающийся закат' },
+                    { name: 'Океан', class: 'bg-ocean', price: 200, desc: 'Волны голубого океана' },
+                    { name: 'Лес', class: 'bg-forest', price: 150, desc: 'Зелёный лес' },
+                    { name: 'Аврора', class: 'bg-aurora', price: 220, desc: 'Северное сияние' },
+                    { name: 'Лава', class: 'bg-lava', price: 250, desc: 'Горячая лава' },
+                    { name: 'Галактика', class: 'bg-galaxy', price: 280, desc: 'Космическая галактика' }
                 ],
                 rewards: []
             },
@@ -865,7 +935,7 @@
                 const container = document.getElementById('shopTabsContainer');
                 container.innerHTML = `
                     <button class="shop-tab active" onclick="app.switchShopTab('avatars')">Аватары</button>
-                    <button class="shop-tab" onclick="app.switchShopTab('themes')">Темы</button>
+                    <button class="shop-tab" onclick="app.switchShopTab('backgrounds')">Фоны</button>
                     <button class="shop-tab" onclick="app.switchShopTab('rewards')">Призы</button>
                 `;
                 this.renderShopItems('avatars');
@@ -891,18 +961,35 @@
                 }
 
                 const items = this.shop[tab];
-                container.innerHTML = items.map(item => `
-                    <div class="shop-item">
-                        <div class="item-icon">${item.icon}</div>
-                        <div class="item-info">
-                            <div class="item-name">${item.name}</div>
-                            <div class="item-desc">${item.desc}</div>
-                        </div>
-                        <button class="buy-btn" onclick="app.buyItem('${item.name}', ${item.price})">
-                            💰 ${item.price}
-                        </button>
-                    </div>
-                `).join('');
+                container.innerHTML = items.map((item, idx) => {
+                    if (tab === 'backgrounds') {
+                        return `
+                            <div class="shop-item">
+                                <div class="background-preview ${item.class}"></div>
+                                <div class="item-info">
+                                    <div class="item-name">${item.name}</div>
+                                    <div class="item-desc">${item.desc}</div>
+                                </div>
+                                <button class="buy-btn" onclick="app.buyItem('${item.name}', ${item.price})">
+                                    💰 ${item.price}
+                                </button>
+                            </div>
+                        `;
+                    } else {
+                        return `
+                            <div class="shop-item">
+                                <div class="item-icon">${item.icon}</div>
+                                <div class="item-info">
+                                    <div class="item-name">${item.name}</div>
+                                    <div class="item-desc">${item.desc}</div>
+                                </div>
+                                <button class="buy-btn" onclick="app.buyItem('${item.name}', ${item.price})">
+                                    💰 ${item.price}
+                                </button>
+                            </div>
+                        `;
+                    }
+                }).join('');
             },
 
             buyItem(name, price) {
