@@ -144,12 +144,8 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* Main Menu */
@@ -250,6 +246,137 @@
             font-size: 11px;
             font-weight: 600;
             color: var(--text);
+        }
+
+        /* Game Mode Selection */
+        .game-modes-container {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .mode-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .mode-section-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .mode-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .mode-card:hover,
+        .mode-card:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mode-card:active {
+            transform: scale(0.95);
+        }
+
+        .mode-icon {
+            font-size: 24px;
+        }
+
+        .mode-info {
+            flex: 1;
+        }
+
+        .mode-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .mode-desc {
+            font-size: 11px;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+
+        /* Game Play */
+        .game-content {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            height: 100%;
+        }
+
+        .game-board {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 16px;
+            border-radius: 12px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
+
+        .game-status {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text);
+        }
+
+        .game-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .game-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .game-btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .game-btn-secondary {
+            background: var(--border);
+            color: var(--text);
+        }
+
+        .game-btn:hover,
+        .game-btn:focus {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .game-btn:active {
+            transform: scale(0.95);
         }
 
         /* Profile */
@@ -404,37 +531,6 @@
             color: white;
         }
 
-        .game-settings {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .setting-slider {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .setting-slider label {
-            font-size: 12px;
-            color: var(--text);
-            min-width: 60px;
-        }
-
-        .setting-slider input {
-            flex: 1;
-            cursor: pointer;
-            accent-color: var(--primary);
-        }
-
-        .setting-value {
-            font-size: 12px;
-            font-weight: 600;
-            min-width: 30px;
-            text-align: right;
-        }
-
         /* Shop */
         .shop-content {
             padding: 16px;
@@ -501,110 +597,6 @@
             flex-shrink: 0;
         }
 
-        .background-preview {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            flex-shrink: 0;
-            border: 2px solid var(--border);
-        }
-
-        .bg-sunset {
-            animation: bgSunset 6s ease infinite;
-        }
-
-        .bg-ocean {
-            animation: bgOcean 6s ease infinite;
-        }
-
-        .bg-forest {
-            animation: bgForest 6s ease infinite;
-        }
-
-        .bg-aurora {
-            animation: bgAurora 6s ease infinite;
-        }
-
-        .bg-lava {
-            animation: bgLava 6s ease infinite;
-        }
-
-        .bg-galaxy {
-            animation: bgGalaxy 6s ease infinite;
-        }
-
-        @keyframes bgSunset {
-            0% {
-                background: linear-gradient(135deg, #FF6B6B 0%, #FFA500 50%, #FFD700 100%);
-            }
-            50% {
-                background: linear-gradient(135deg, #FF8E53 0%, #FFA500 50%, #FFD93D 100%);
-            }
-            100% {
-                background: linear-gradient(135deg, #FF6B6B 0%, #FFA500 50%, #FFD700 100%);
-            }
-        }
-
-        @keyframes bgOcean {
-            0% {
-                background: linear-gradient(135deg, #0074E4 0%, #00D4FF 50%, #A8EDEA 100%);
-            }
-            50% {
-                background: linear-gradient(135deg, #0099E4 0%, #00BFFF 50%, #87CEEB 100%);
-            }
-            100% {
-                background: linear-gradient(135deg, #0074E4 0%, #00D4FF 50%, #A8EDEA 100%);
-            }
-        }
-
-        @keyframes bgForest {
-            0% {
-                background: linear-gradient(135deg, #134E5E 0%, #71B280 50%, #A8E6CF 100%);
-            }
-            50% {
-                background: linear-gradient(135deg, #1A6B5E 0%, #7AC87F 50%, #B8F3D8 100%);
-            }
-            100% {
-                background: linear-gradient(135deg, #134E5E 0%, #71B280 50%, #A8E6CF 100%);
-            }
-        }
-
-        @keyframes bgAurora {
-            0% {
-                background: linear-gradient(135deg, #11998E 0%, #38EF7D 50%, #C4EC67 100%);
-            }
-            50% {
-                background: linear-gradient(135deg, #00C9FF 0%, #92FE9D 50%, #ACFF67 100%);
-            }
-            100% {
-                background: linear-gradient(135deg, #11998E 0%, #38EF7D 50%, #C4EC67 100%);
-            }
-        }
-
-        @keyframes bgLava {
-            0% {
-                background: linear-gradient(135deg, #FF6B00 0%, #FF0084 50%, #7F00FF 100%);
-            }
-            50% {
-                background: linear-gradient(135deg, #FF8533 0%, #FF33CC 50%, #9D33FF 100%);
-            }
-            100% {
-                background: linear-gradient(135deg, #FF6B00 0%, #FF0084 50%, #7F00FF 100%);
-            }
-        }
-
-        @keyframes bgGalaxy {
-            0% {
-                background: linear-gradient(135deg, #1A0033 0%, #4D0066 50%, #FF1493 100%);
-            }
-            50% {
-                background: linear-gradient(135deg, #2D0052 0%, #6D0099 50%, #FF69B4 100%);
-            }
-            100% {
-                background: linear-gradient(135deg, #1A0033 0%, #4D0066 50%, #FF1493 100%);
-            }
-        }
-
         .item-info {
             flex: 1;
         }
@@ -642,28 +634,6 @@
 
         .buy-btn:active {
             transform: scale(0.95);
-        }
-
-        /* Coming Soon */
-        .coming-soon {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100%;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .coming-soon-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
-        }
-
-        .coming-soon-text {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text);
         }
 
         /* Ratings */
@@ -841,28 +811,11 @@
             transform: scale(0.95);
         }
 
-        body.vibrant-theme .menu-item {
-            background: #ffffff;
-            border: 2px solid var(--border);
-        }
-
-        body.vibrant-theme .stat-box {
-            background: linear-gradient(135deg, #ff006e 0%, #ffb703 100%);
-        }
-
-        /* Accessibility */
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
-            }
-        }
-
-        @media (max-height: 600px) {
-            .profile-stats {
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-                gap: 8px;
             }
         }
     </style>
@@ -874,7 +827,7 @@
             <h1 class="header-title" id="headerTitle">Умные Игры</h1>
             <div class="coin-display" aria-live="polite">
                 <span aria-label="Коины">💰</span>
-                <span id="shopCoins">0</span>
+                <span id="shopCoins">250</span>
             </div>
         </div>
 
@@ -906,28 +859,97 @@
                 </div>
             </div>
 
+            <!-- Game Mode Selection -->
+            <div id="gameModeScreen" class="screen">
+                <div class="game-modes-container">
+                    <div class="mode-section">
+                        <div class="mode-section-title">Выбери противника</div>
+                        <button class="mode-card" onclick="app.startGame('ai', 'easy')" aria-label="Играть против робота на лёгком уровне">
+                            <div class="mode-icon" aria-hidden="true">🤖</div>
+                            <div class="mode-info">
+                                <div class="mode-name">Робот</div>
+                                <div class="mode-desc">Играть против ИИ</div>
+                            </div>
+                        </button>
+                        <button class="mode-card" onclick="app.startGame('self', 'easy')" aria-label="Играть в режиме два на одном экране">
+                            <div class="mode-icon" aria-hidden="true">🎮</div>
+                            <div class="mode-info">
+                                <div class="mode-name">Сам на себя</div>
+                                <div class="mode-desc">Локальная игра</div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="mode-section">
+                        <div class="mode-section-title">Уровень сложности</div>
+                        <button class="mode-card" onclick="app.updateDifficulty('easy')" aria-label="Лёгкий уровень">
+                            <div class="mode-icon" aria-hidden="true">⭐</div>
+                            <div class="mode-info">
+                                <div class="mode-name">Лёгкий</div>
+                                <div class="mode-desc">Для новичков</div>
+                            </div>
+                        </button>
+                        <button class="mode-card" onclick="app.updateDifficulty('medium')" aria-label="Средний уровень">
+                            <div class="mode-icon" aria-hidden="true">⭐⭐</div>
+                            <div class="mode-info">
+                                <div class="mode-name">Средний</div>
+                                <div class="mode-desc">Для опытных</div>
+                            </div>
+                        </button>
+                        <button class="mode-card" onclick="app.updateDifficulty('hard')" aria-label="Сложный уровень">
+                            <div class="mode-icon" aria-hidden="true">⭐⭐⭐</div>
+                            <div class="mode-info">
+                                <div class="mode-name">Сложный</div>
+                                <div class="mode-desc">Для мастеров</div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="game-buttons">
+                        <button class="game-btn game-btn-primary" onclick="app.playGame()" aria-label="Начать игру">Начать 🎮</button>
+                        <button class="game-btn game-btn-secondary" onclick="app.showScreen('mainMenuScreen'); app.updateHeaderTitle('mainMenuScreen')" aria-label="Вернуться в меню">Меню</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Play Screen -->
+            <div id="gamePlayScreen" class="screen">
+                <div class="game-content">
+                    <div class="game-board" id="gameBoard">
+                        <div class="game-status">
+                            <p id="gameStatus">Загрузка игры...</p>
+                            <p id="gameScore" style="margin-top: 8px; font-size: 11px; color: var(--text-light);"></p>
+                        </div>
+                    </div>
+                    <div class="game-buttons">
+                        <button class="game-btn game-btn-primary" onclick="app.newGame()" aria-label="Новая игра">Новая 🎲</button>
+                        <button class="game-btn game-btn-secondary" onclick="app.showScreen('mainMenuScreen'); app.updateHeaderTitle('mainMenuScreen')" aria-label="Вернуться в меню">Меню</button>
+                    </div>
+                </div>
+            </div>
+
             <!-- Profile -->
             <div id="profileScreen" class="screen">
                 <div class="profile-content">
                     <div class="profile-header">
                         <div class="profile-avatar" role="img" aria-label="Аватар профиля">🧠</div>
-                        <h2 class="profile-name" id="profileName">Игрок</h2>
+                        <h2 class="profile-name" id="profileName">Умный Игрок</h2>
                     </div>
                     <div class="profile-stats">
                         <div class="stat-box">
-                            <div class="stat-value" id="profileRating">0</div>
+                            <div class="stat-value" id="profileRating">1250</div>
                             <div class="stat-label">Рейтинг</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-value" id="profileCoins">0</div>
+                            <div class="stat-value" id="profileCoins">500</div>
                             <div class="stat-label">Коины</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-value" id="profileWins">0</div>
+                            <div class="stat-value" id="profileWins">42</div>
                             <div class="stat-label">Побед</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-value" id="profileLosses">0</div>
+                            <div class="stat-value" id="profileLosses">18</div>
                             <div class="stat-label">Поражений</div>
                         </div>
                     </div>
@@ -953,22 +975,6 @@
                             <button class="theme-btn" onclick="app.setTheme('vibrant')">Яркая</button>
                         </div>
                     </div>
-
-                    <div class="setting-group">
-                        <h3 class="setting-title">🎮 Параметры игр</h3>
-                        <div class="game-settings">
-                            <div class="setting-slider">
-                                <label for="difficultySlider">Сложность</label>
-                                <input type="range" id="difficultySlider" min="1" max="3" value="2" onchange="app.updateSetting('difficulty', this.value)" aria-label="Уровень сложности">
-                                <div class="setting-value" id="difficultyValue">2</div>
-                            </div>
-                            <div class="setting-slider">
-                                <label for="boardSizeSlider">Размер поля</label>
-                                <input type="range" id="boardSizeSlider" min="8" max="20" value="10" onchange="app.updateSetting('boardSize', this.value)" aria-label="Размер игрового поля">
-                                <div class="setting-value" id="boardSizeValue">10</div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -985,14 +991,6 @@
                 <div class="ratings-content">
                     <div class="rating-tabs" id="ratingTabsContainer" role="tablist"></div>
                     <div class="rating-list" id="ratingsListContainer" role="region" aria-label="Рейтинги"></div>
-                </div>
-            </div>
-
-            <!-- Coming Soon -->
-            <div id="comingSoonScreen" class="screen">
-                <div class="coming-soon">
-                    <div class="coming-soon-icon" aria-hidden="true">⏳</div>
-                    <h2 class="coming-soon-text">Скоро...</h2>
                 </div>
             </div>
         </main>
@@ -1014,15 +1012,16 @@
 
         const app = {
             state: {
+                currentGame: null,
+                gameMode: 'ai', // 'ai' или 'self'
+                difficulty: 'medium', // 'easy', 'medium', 'hard'
                 soundEnabled: true,
                 theme: 'light',
-                difficulty: 2,
-                boardSize: 10,
                 shopCoins: 250,
                 profileRating: 1250,
                 profileCoins: 500,
-                profileWins: 15,
-                profileLosses: 8
+                profileWins: 42,
+                profileLosses: 18
             },
 
             games: [
@@ -1034,6 +1033,55 @@
                 { name: 'Морской бой', icon: '🚢', id: 'battleship' }
             ],
 
+            ratingTypes: [
+                { id: 'overall', name: '📊 Общий рейтинг', icon: '📊' },
+                { id: 'sudoku', name: '🔢 Судоку', icon: '🔢' },
+                { id: 'tictactoe', name: '⭕ Крестики-нолики', icon: '⭕' },
+                { id: 'chess', name: '♟️ Шахматы', icon: '♟️' },
+                { id: 'checkers', name: '⚫ Шашки', icon: '⚫' },
+                { id: 'minesweeper', name: '💣 Сапёр', icon: '💣' }
+            ],
+
+            ratings: {
+                overall: [
+                    { position: 1, name: 'Александр', score: 3850, coins: 1200 },
+                    { position: 2, name: 'Мария', score: 3620, coins: 950 },
+                    { position: 3, name: 'Иван', score: 3480, coins: 890 },
+                    { position: 4, name: 'Елена', score: 3290, coins: 750 },
+                    { position: 5, name: 'Дмитрий', score: 3100, coins: 620 },
+                    { position: 6, name: 'Ольга', score: 2950, coins: 550 },
+                    { position: 7, name: 'Сергей', score: 2780, coins: 480 },
+                    { position: 8, name: 'Анна', score: 2610, coins: 420 },
+                    { position: 9, name: 'Павел', score: 2450, coins: 380 },
+                    { position: 10, name: 'Виктор', score: 2290, coins: 320 }
+                ],
+                sudoku: [
+                    { position: 1, name: 'Математик', score: 5200, coins: 800 },
+                    { position: 2, name: 'Логик', score: 4950, coins: 700 },
+                    { position: 3, name: 'Гений', score: 4680, coins: 600 }
+                ],
+                tictactoe: [
+                    { position: 1, name: 'Стратег', score: 4500, coins: 750 },
+                    { position: 2, name: 'Тактик', score: 4200, coins: 650 },
+                    { position: 3, name: 'Мастер', score: 3900, coins: 550 }
+                ],
+                chess: [
+                    { position: 1, name: 'Гроссмейстер', score: 6200, coins: 1000 },
+                    { position: 2, name: 'Мастер', score: 5800, coins: 850 },
+                    { position: 3, name: 'Король', score: 5400, coins: 700 }
+                ],
+                checkers: [
+                    { position: 1, name: 'Чемпион', score: 5100, coins: 900 },
+                    { position: 2, name: 'Профи', score: 4700, coins: 750 },
+                    { position: 3, name: 'Эксперт', score: 4300, coins: 600 }
+                ],
+                minesweeper: [
+                    { position: 1, name: 'Минёр', score: 4800, coins: 850 },
+                    { position: 2, name: 'Дефузер', score: 4400, coins: 700 },
+                    { position: 3, name: 'Детектив', score: 4000, coins: 550 }
+                ]
+            },
+
             shop: {
                 avatars: [
                     { name: 'Гений', icon: '🧠', price: 100, desc: 'Умный аватар' },
@@ -1042,19 +1090,19 @@
                     { name: 'Ракета', icon: '🚀', price: 250, desc: 'Суперскоростной' }
                 ],
                 backgrounds: [
-                    { name: 'Закат', class: 'bg-sunset', price: 180, desc: 'Переливающийся закат' },
-                    { name: 'Океан', class: 'bg-ocean', price: 200, desc: 'Волны голубого океана' },
-                    { name: 'Лес', class: 'bg-forest', price: 150, desc: 'Зелёный лес' },
-                    { name: 'Аврора', class: 'bg-aurora', price: 220, desc: 'Северное сияние' },
-                    { name: 'Лава', class: 'bg-lava', price: 250, desc: 'Горячая лава' },
-                    { name: 'Галактика', class: 'bg-galaxy', price: 280, desc: 'Космическая галактика' }
-                ],
-                rewards: []
+                    { name: 'Закат', price: 180, desc: 'Переливающийся закат' },
+                    { name: 'Океан', price: 200, desc: 'Волны голубого океана' },
+                    { name: 'Лес', price: 150, desc: 'Зелёный лес' },
+                    { name: 'Аврора', price: 220, desc: 'Северное сияние' },
+                    { name: 'Лава', price: 250, desc: 'Горячая лава' },
+                    { name: 'Галактика', price: 280, desc: 'Космическая галактика' }
+                ]
             },
 
             init() {
                 this.renderGames();
                 this.renderShopTabs();
+                this.renderRatingTabs();
                 this.updateUI();
                 this.loadTheme();
             },
@@ -1064,11 +1112,113 @@
                 if (!container) return;
                 
                 container.innerHTML = this.games.map(game => `
-                    <button class="game-item" onclick="app.playGame('${game.id}')" aria-label="Игра ${game.name}">
+                    <button class="game-item" onclick="app.selectGame('${game.id}', '${game.name}')" aria-label="Игра ${game.name}">
                         <div class="icon" aria-hidden="true">${game.icon}</div>
                         <div class="name">${game.name}</div>
                     </button>
                 `).join('');
+            },
+
+            selectGame(gameId, gameName) {
+                this.state.currentGame = gameId;
+                this.updateHeaderTitle('gameModeScreen', gameName);
+                this.showScreen('gameModeScreen');
+            },
+
+            startGame(mode, difficulty) {
+                this.state.gameMode = mode;
+                if (difficulty) {
+                    this.state.difficulty = difficulty;
+                }
+            },
+
+            updateDifficulty(difficulty) {
+                this.state.difficulty = difficulty;
+                const status = document.getElementById('gameStatus');
+                if (status) {
+                    const diffNames = { easy: 'Лёгкий', medium: 'Средний', hard: 'Сложный' };
+                    status.textContent = `Уровень: ${diffNames[difficulty]}`;
+                }
+            },
+
+            playGame() {
+                const gameName = this.games.find(g => g.id === this.state.currentGame)?.name || 'Игра';
+                const modeNames = { ai: 'Робот', self: 'Сам на себя' };
+                const diffNames = { easy: 'Лёгкий', medium: 'Средний', hard: 'Сложный' };
+                
+                this.updateHeaderTitle('gamePlayScreen', gameName);
+                this.showScreen('gamePlayScreen');
+                
+                const status = document.getElementById('gameStatus');
+                const score = document.getElementById('gameScore');
+                
+                if (status) {
+                    status.textContent = `🎮 ${gameName} (${modeNames[this.state.gameMode]})`;
+                }
+                if (score) {
+                    score.textContent = `📊 Сложность: ${diffNames[this.state.difficulty]}`;
+                }
+            },
+
+            newGame() {
+                const status = document.getElementById('gameStatus');
+                if (status) {
+                    status.textContent = '🎲 Новая игра начата!';
+                }
+                this.showModal('🎮', 'Игра началась!', 'Удачи в игре!');
+            },
+
+            renderRatingTabs() {
+                const container = document.getElementById('ratingTabsContainer');
+                if (!container) return;
+                
+                container.innerHTML = this.ratingTypes.map((type, index) => `
+                    <button class="rating-tab ${index === 0 ? 'active' : ''}" onclick="app.switchRatingTab('${type.id}')" role="tab" aria-selected="${index === 0}">
+                        ${type.icon} ${type.name}
+                    </button>
+                `).join('');
+                
+                this.renderRatings('overall');
+            },
+
+            switchRatingTab(ratingId) {
+                const tabs = document.querySelectorAll('.rating-tab');
+                tabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    tab.setAttribute('aria-selected', 'false');
+                });
+                
+                if (event && event.target) {
+                    event.target.classList.add('active');
+                    event.target.setAttribute('aria-selected', 'true');
+                }
+                
+                this.renderRatings(ratingId);
+            },
+
+            renderRatings(ratingId) {
+                const container = document.getElementById('ratingsListContainer');
+                if (!container) return;
+                
+                const ratings = this.ratings[ratingId] || [];
+                
+                container.innerHTML = ratings.map(player => {
+                    let positionClass = '';
+                    if (player.position === 1) positionClass = 'gold';
+                    else if (player.position === 2) positionClass = 'silver';
+                    else if (player.position === 3) positionClass = 'bronze';
+                    
+                    return `
+                        <div class="rating-item">
+                            <div class="rating-position ${positionClass}">#${player.position}</div>
+                            <div class="rating-info">
+                                <div class="rating-name">${this.escapeHtml(player.name)}</div>
+                                <div class="rating-score">Очки: ${player.score}</div>
+                            </div>
+                            <div class="rating-coins">💰 ${player.coins}</div>
+                        </div>
+                    `;
+                }).join('');
             },
 
             renderShopTabs() {
@@ -1078,7 +1228,6 @@
                 container.innerHTML = `
                     <button class="shop-tab active" onclick="app.switchShopTab('avatars')" role="tab" aria-selected="true">Аватары</button>
                     <button class="shop-tab" onclick="app.switchShopTab('backgrounds')" role="tab" aria-selected="false">Фоны</button>
-                    <button class="shop-tab" onclick="app.switchShopTab('rewards')" role="tab" aria-selected="false">Призы</button>
                 `;
                 this.renderShopItems('avatars');
             },
@@ -1102,45 +1251,23 @@
                 const container = document.getElementById('shopItemsContainer');
                 if (!container) return;
                 
-                if (tab === 'rewards') {
-                    container.innerHTML = `
-                        <div class="coming-soon" style="min-height: auto; padding: 40px 20px;">
-                            <div class="coming-soon-icon" aria-hidden="true">⏳</div>
-                            <p class="coming-soon-text">Скоро...</p>
-                        </div>
-                    `;
-                    return;
-                }
-
                 const items = this.shop[tab];
                 container.innerHTML = items.map((item) => {
-                    if (tab === 'backgrounds') {
+                    if (tab === 'avatars') {
                         return `
                             <div class="shop-item">
-                                <div class="background-preview ${item.class}" aria-hidden="true"></div>
+                                <div class="item-icon">${item.icon}</div>
                                 <div class="item-info">
                                     <div class="item-name">${this.escapeHtml(item.name)}</div>
                                     <div class="item-desc">${this.escapeHtml(item.desc)}</div>
                                 </div>
-                                <button class="buy-btn" onclick="app.buyItem('${this.escapeHtml(item.name)}', ${item.price})" aria-label="Купить ${item.name} за ${item.price} коинов">
-                                    💰 ${item.price}
-                                </button>
-                            </div>
-                        `;
-                    } else {
-                        return `
-                            <div class="shop-item">
-                                <div class="item-icon" aria-hidden="true">${item.icon}</div>
-                                <div class="item-info">
-                                    <div class="item-name">${this.escapeHtml(item.name)}</div>
-                                    <div class="item-desc">${this.escapeHtml(item.desc)}</div>
-                                </div>
-                                <button class="buy-btn" onclick="app.buyItem('${this.escapeHtml(item.name)}', ${item.price})" aria-label="Купить ${item.name} за ${item.price} коинов">
+                                <button class="buy-btn" onclick="app.buyItem('${this.escapeHtml(item.name)}', ${item.price})">
                                     💰 ${item.price}
                                 </button>
                             </div>
                         `;
                     }
+                    return '';
                 }).join('');
             },
 
@@ -1160,10 +1287,6 @@
                 }
             },
 
-            playGame(gameId) {
-                this.showModal('🎮', 'Игра запускается', `Режим: ${gameId}\nСложность: ${this.state.difficulty}`);
-            },
-
             showScreen(screenId) {
                 const screens = document.querySelectorAll('.screen');
                 screens.forEach(s => s.classList.remove('active'));
@@ -1177,25 +1300,28 @@
                 if (backBtn) {
                     backBtn.classList.toggle('hidden', screenId === 'mainMenuScreen');
                     if (screenId !== 'mainMenuScreen') {
-                        backBtn.onclick = () => this.showScreen('mainMenuScreen');
+                        backBtn.onclick = () => {
+                            this.showScreen('mainMenuScreen');
+                            this.updateHeaderTitle('mainMenuScreen');
+                        };
                     }
                 }
-
-                this.updateHeaderTitle(screenId);
             },
 
-            updateHeaderTitle(screenId) {
+            updateHeaderTitle(screenId, customName = null) {
                 const titles = {
                     mainMenuScreen: 'Умные Игры',
                     profileScreen: 'Профиль',
                     settingsScreen: 'Настройки',
                     shopScreen: 'Магазин',
-                    ratingsScreen: 'Рейтинги'
+                    ratingsScreen: 'Рейтинги',
+                    gameModeScreen: customName || 'Выбор режима',
+                    gamePlayScreen: customName || 'Игра'
                 };
                 
                 const title = document.getElementById('headerTitle');
                 if (title) {
-                    title.textContent = titles[screenId] || 'Умные Игры';
+                    title.textContent = titles[screenId] || customName || 'Умные Игры';
                 }
             },
 
@@ -1231,15 +1357,6 @@
                 this.state.soundEnabled = !this.state.soundEnabled;
                 el.classList.toggle('active');
                 el.setAttribute('aria-checked', this.state.soundEnabled);
-            },
-
-            updateSetting(key, value) {
-                this.state[key] = parseInt(value, 10);
-                const valueEl = document.getElementById(key + 'Value');
-                if (valueEl) {
-                    valueEl.textContent = value;
-                }
-                localStorage.setItem('gameSetting_' + key, value);
             },
 
             updateUI() {
