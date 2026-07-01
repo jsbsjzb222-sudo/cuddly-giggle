@@ -126,6 +126,36 @@
             color: white;
         }
 
+        .language-selector {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 300;
+        }
+
+        .lang-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            margin: 0 2px;
+        }
+
+        .lang-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .lang-btn.active {
+            background: #333;
+            box-shadow: 0 0 0 2px white;
+        }
+
         .container {
             flex: 1;
             overflow-y: auto;
@@ -821,6 +851,11 @@
     </style>
 </head>
 <body>
+    <div class="language-selector" id="languageSelector">
+        <button class="lang-btn active" onclick="app.setLanguage('ru')" title="Русский">РУ</button>
+        <button class="lang-btn" onclick="app.setLanguage('en')" title="English">EN</button>
+    </div>
+
     <div id="app">
         <div class="header">
             <button class="back-btn hidden" id="backBtn" aria-label="Назад">←</button>
@@ -838,23 +873,23 @@
                     <div class="menu-grid" role="navigation" aria-label="Главное меню">
                         <button class="menu-item" onclick="app.showScreen('profileScreen')" aria-label="Профиль">
                             <div class="icon" aria-hidden="true">👤</div>
-                            <div class="label">Профиль</div>
+                            <div class="label" data-i18n="profile">Профиль</div>
                         </button>
                         <button class="menu-item" onclick="app.showScreen('ratingsScreen')" aria-label="Рейтинги">
                             <div class="icon" aria-hidden="true">🏆</div>
-                            <div class="label">Рейтинги</div>
+                            <div class="label" data-i18n="ratings">Рейтинги</div>
                         </button>
                         <button class="menu-item" onclick="app.showScreen('shopScreen')" aria-label="Магазин">
                             <div class="icon" aria-hidden="true">🛍️</div>
-                            <div class="label">Магазин</div>
+                            <div class="label" data-i18n="shop">Магазин</div>
                         </button>
                         <button class="menu-item" onclick="app.showScreen('settingsScreen')" aria-label="Настройки">
                             <div class="icon" aria-hidden="true">⚙️</div>
-                            <div class="label">Настройки</div>
+                            <div class="label" data-i18n="settings">Настройки</div>
                         </button>
                     </div>
 
-                    <h2 class="games-title">Мини-игры</h2>
+                    <h2 class="games-title" data-i18n="mini_games">Мини-игры</h2>
                     <div class="games-grid" id="gamesContainer" role="region" aria-label="Доступные игры"></div>
                 </div>
             </div>
@@ -863,51 +898,51 @@
             <div id="gameModeScreen" class="screen">
                 <div class="game-modes-container">
                     <div class="mode-section">
-                        <div class="mode-section-title">Выбери противника</div>
+                        <div class="mode-section-title" data-i18n="choose_opponent">Выбери противника</div>
                         <button class="mode-card" onclick="app.startGame('ai', 'easy')" aria-label="Играть против робота на лёгком уровне">
                             <div class="mode-icon" aria-hidden="true">🤖</div>
                             <div class="mode-info">
-                                <div class="mode-name">Робот</div>
-                                <div class="mode-desc">Играть против ИИ</div>
+                                <div class="mode-name" data-i18n="robot">Робот</div>
+                                <div class="mode-desc" data-i18n="play_ai">Играть против ИИ</div>
                             </div>
                         </button>
                         <button class="mode-card" onclick="app.startGame('self', 'easy')" aria-label="Играть в режиме два на одном экране">
                             <div class="mode-icon" aria-hidden="true">🎮</div>
                             <div class="mode-info">
-                                <div class="mode-name">Сам на себя</div>
-                                <div class="mode-desc">Локальная игра</div>
+                                <div class="mode-name" data-i18n="self">Сам на себя</div>
+                                <div class="mode-desc" data-i18n="local_game">Локальная игра</div>
                             </div>
                         </button>
                     </div>
 
                     <div class="mode-section">
-                        <div class="mode-section-title">Уровень сложности</div>
+                        <div class="mode-section-title" data-i18n="choose_difficulty">Уровень сложности</div>
                         <button class="mode-card" onclick="app.updateDifficulty('easy')" aria-label="Лёгкий уровень">
                             <div class="mode-icon" aria-hidden="true">⭐</div>
                             <div class="mode-info">
-                                <div class="mode-name">Лёгкий</div>
-                                <div class="mode-desc">Для новичков</div>
+                                <div class="mode-name" data-i18n="easy">Лёгкий</div>
+                                <div class="mode-desc" data-i18n="easy_desc">Для новичков</div>
                             </div>
                         </button>
                         <button class="mode-card" onclick="app.updateDifficulty('medium')" aria-label="Средний уровень">
                             <div class="mode-icon" aria-hidden="true">⭐⭐</div>
                             <div class="mode-info">
-                                <div class="mode-name">Средний</div>
-                                <div class="mode-desc">Для опытных</div>
+                                <div class="mode-name" data-i18n="medium">Средний</div>
+                                <div class="mode-desc" data-i18n="medium_desc">Для опытных</div>
                             </div>
                         </button>
                         <button class="mode-card" onclick="app.updateDifficulty('hard')" aria-label="Сложный уровень">
                             <div class="mode-icon" aria-hidden="true">⭐⭐⭐</div>
                             <div class="mode-info">
-                                <div class="mode-name">Сложный</div>
-                                <div class="mode-desc">Для мастеров</div>
+                                <div class="mode-name" data-i18n="hard">Сложный</div>
+                                <div class="mode-desc" data-i18n="hard_desc">Для мастеров</div>
                             </div>
                         </button>
                     </div>
 
                     <div class="game-buttons">
-                        <button class="game-btn game-btn-primary" onclick="app.playGame()" aria-label="Начать игру">Начать 🎮</button>
-                        <button class="game-btn game-btn-secondary" onclick="app.showScreen('mainMenuScreen'); app.updateHeaderTitle('mainMenuScreen')" aria-label="Вернуться в меню">Меню</button>
+                        <button class="game-btn game-btn-primary" onclick="app.playGame()" data-i18n="start_game">Начать 🎮</button>
+                        <button class="game-btn game-btn-secondary" onclick="app.showScreen('mainMenuScreen'); app.updateHeaderTitle('mainMenuScreen')" data-i18n="menu">Меню</button>
                     </div>
                 </div>
             </div>
@@ -917,13 +952,13 @@
                 <div class="game-content">
                     <div class="game-board" id="gameBoard">
                         <div class="game-status">
-                            <p id="gameStatus">Загрузка игры...</p>
+                            <p id="gameStatus" data-i18n="loading">Загрузка игры...</p>
                             <p id="gameScore" style="margin-top: 8px; font-size: 11px; color: var(--text-light);"></p>
                         </div>
                     </div>
                     <div class="game-buttons">
-                        <button class="game-btn game-btn-primary" onclick="app.newGame()" aria-label="Новая игра">Новая 🎲</button>
-                        <button class="game-btn game-btn-secondary" onclick="app.showScreen('mainMenuScreen'); app.updateHeaderTitle('mainMenuScreen')" aria-label="Вернуться в меню">Меню</button>
+                        <button class="game-btn game-btn-primary" onclick="app.newGame()" data-i18n="new_game">Новая 🎲</button>
+                        <button class="game-btn game-btn-secondary" onclick="app.showScreen('mainMenuScreen'); app.updateHeaderTitle('mainMenuScreen')" data-i18n="menu">Меню</button>
                     </div>
                 </div>
             </div>
@@ -938,19 +973,19 @@
                     <div class="profile-stats">
                         <div class="stat-box">
                             <div class="stat-value" id="profileRating">1250</div>
-                            <div class="stat-label">Рейтинг</div>
+                            <div class="stat-label" data-i18n="rating">Рейтинг</div>
                         </div>
                         <div class="stat-box">
                             <div class="stat-value" id="profileCoins">500</div>
-                            <div class="stat-label">Коины</div>
+                            <div class="stat-label" data-i18n="coins">Коины</div>
                         </div>
                         <div class="stat-box">
                             <div class="stat-value" id="profileWins">42</div>
-                            <div class="stat-label">Побед</div>
+                            <div class="stat-label" data-i18n="wins">Побед</div>
                         </div>
                         <div class="stat-box">
                             <div class="stat-value" id="profileLosses">18</div>
-                            <div class="stat-label">Поражений</div>
+                            <div class="stat-label" data-i18n="losses">Поражений</div>
                         </div>
                     </div>
                 </div>
@@ -960,19 +995,19 @@
             <div id="settingsScreen" class="screen">
                 <div class="settings-content">
                     <div class="setting-group">
-                        <h3 class="setting-title">🔊 Звук</h3>
+                        <h3 class="setting-title" data-i18n="sound">🔊 Звук</h3>
                         <div class="setting-item">
-                            <label for="soundToggle">Включить звук</label>
+                            <label for="soundToggle" data-i18n="enable_sound">Включить звук</label>
                             <button class="toggle-switch active" id="soundToggle" role="switch" aria-checked="true" onclick="app.toggleSound(this)"></button>
                         </div>
                     </div>
 
                     <div class="setting-group">
-                        <h3 class="setting-title">🎨 Тема</h3>
+                        <h3 class="setting-title" data-i18n="theme_select">🎨 Тема</h3>
                         <div class="theme-options" role="group" aria-label="Выбор темы">
-                            <button class="theme-btn selected" onclick="app.setTheme('light')">Светлая</button>
-                            <button class="theme-btn" onclick="app.setTheme('dark')">Тёмная</button>
-                            <button class="theme-btn" onclick="app.setTheme('vibrant')">Яркая</button>
+                            <button class="theme-btn selected" onclick="app.setTheme('light')" data-i18n="light">Светлая</button>
+                            <button class="theme-btn" onclick="app.setTheme('dark')" data-i18n="dark">Тёмная</button>
+                            <button class="theme-btn" onclick="app.setTheme('vibrant')" data-i18n="vibrant">Яркая</button>
                         </div>
                     </div>
                 </div>
@@ -1010,11 +1045,103 @@
     <script>
         'use strict';
 
+        const i18n = {
+            ru: {
+                profile: 'Профиль',
+                ratings: 'Рейтинги',
+                shop: 'Магазин',
+                settings: 'Настройки',
+                mini_games: 'Мини-игры',
+                choose_opponent: 'Выбери противника',
+                robot: 'Робот',
+                play_ai: 'Играть против ИИ',
+                self: 'Сам на себя',
+                local_game: 'Локальная игра',
+                choose_difficulty: 'Уровень сложности',
+                easy: 'Лёгкий',
+                easy_desc: 'Для новичков',
+                medium: 'Средний',
+                medium_desc: 'Для опытных',
+                hard: 'Сложный',
+                hard_desc: 'Для мастеров',
+                start_game: 'Начать 🎮',
+                menu: 'Меню',
+                loading: 'Загрузка игры...',
+                new_game: 'Новая 🎲',
+                rating: 'Рейтинг',
+                coins: 'Коины',
+                wins: 'Побед',
+                losses: 'Поражений',
+                sound: '🔊 Звук',
+                enable_sound: 'Включить звук',
+                theme_select: '🎨 Тема',
+                light: 'Светлая',
+                dark: 'Тёмная',
+                vibrant: 'Яркая',
+                avatars: 'Аватары',
+                backgrounds: 'Фоны',
+                overall_rating: '📊 Общий рейтинг',
+                sudoku: '🔢 Судоку',
+                tictactoe: '⭕ Крестики-нолики',
+                chess: '♟️ Шахматы',
+                checkers: '⚫ Шашки',
+                minesweeper: '💣 Сапёр',
+                smart_player: 'Умный Игрок',
+                purchase_success: 'Вы приобрели',
+                buy: 'Купить',
+            },
+            en: {
+                profile: 'Profile',
+                ratings: 'Ratings',
+                shop: 'Shop',
+                settings: 'Settings',
+                mini_games: 'Mini Games',
+                choose_opponent: 'Choose opponent',
+                robot: 'Robot',
+                play_ai: 'Play against AI',
+                self: 'Local Game',
+                local_game: 'Play with friend',
+                choose_difficulty: 'Difficulty level',
+                easy: 'Easy',
+                easy_desc: 'For beginners',
+                medium: 'Medium',
+                medium_desc: 'For experienced',
+                hard: 'Hard',
+                hard_desc: 'For masters',
+                start_game: 'Start 🎮',
+                menu: 'Menu',
+                loading: 'Loading game...',
+                new_game: 'New 🎲',
+                rating: 'Rating',
+                coins: 'Coins',
+                wins: 'Wins',
+                losses: 'Losses',
+                sound: '🔊 Sound',
+                enable_sound: 'Enable sound',
+                theme_select: '🎨 Theme',
+                light: 'Light',
+                dark: 'Dark',
+                vibrant: 'Vibrant',
+                avatars: 'Avatars',
+                backgrounds: 'Backgrounds',
+                overall_rating: '📊 Overall Rating',
+                sudoku: '🔢 Sudoku',
+                tictactoe: '⭕ Tic Tac Toe',
+                chess: '♟️ Chess',
+                checkers: '⚫ Checkers',
+                minesweeper: '💣 Minesweeper',
+                smart_player: 'Smart Player',
+                purchase_success: 'You purchased',
+                buy: 'Buy',
+            }
+        };
+
         const app = {
             state: {
+                language: localStorage.getItem('language') || app.detectLanguage(),
                 currentGame: null,
-                gameMode: 'ai', // 'ai' или 'self'
-                difficulty: 'medium', // 'easy', 'medium', 'hard'
+                gameMode: 'ai',
+                difficulty: 'medium',
                 soundEnabled: true,
                 theme: 'light',
                 shopCoins: 250,
@@ -1025,81 +1152,130 @@
             },
 
             games: [
-                { name: 'Судоку', icon: '🔢', id: 'sudoku' },
-                { name: 'Крестики-нолики', icon: '⭕', id: 'tictactoe' },
-                { name: 'Шахматы', icon: '♟️', id: 'chess' },
-                { name: 'Шашки', icon: '⚫', id: 'checkers' },
-                { name: 'Сапёр', icon: '💣', id: 'minesweeper' },
-                { name: 'Морской бой', icon: '🚢', id: 'battleship' }
+                { name_ru: 'Судоку', name_en: 'Sudoku', icon: '🔢', id: 'sudoku' },
+                { name_ru: 'Крестики-нолики', name_en: 'Tic Tac Toe', icon: '⭕', id: 'tictactoe' },
+                { name_ru: 'Шахматы', name_en: 'Chess', icon: '♟️', id: 'chess' },
+                { name_ru: 'Шашки', name_en: 'Checkers', icon: '⚫', id: 'checkers' },
+                { name_ru: 'Сапёр', name_en: 'Minesweeper', icon: '💣', id: 'minesweeper' },
+                { name_ru: 'Морской бой', name_en: 'Battleship', icon: '🚢', id: 'battleship' }
             ],
 
             ratingTypes: [
-                { id: 'overall', name: '📊 Общий рейтинг', icon: '📊' },
-                { id: 'sudoku', name: '🔢 Судоку', icon: '🔢' },
-                { id: 'tictactoe', name: '⭕ Крестики-нолики', icon: '⭕' },
-                { id: 'chess', name: '♟️ Шахматы', icon: '♟️' },
-                { id: 'checkers', name: '⚫ Шашки', icon: '⚫' },
-                { id: 'minesweeper', name: '💣 Сапёр', icon: '💣' }
+                { id: 'overall', name_ru: '📊 Общий рейтинг', name_en: '📊 Overall Rating', icon: '📊' },
+                { id: 'sudoku', name_ru: '🔢 Судоку', name_en: '🔢 Sudoku', icon: '🔢' },
+                { id: 'tictactoe', name_ru: '⭕ Крестики-нолики', name_en: '⭕ Tic Tac Toe', icon: '⭕' },
+                { id: 'chess', name_ru: '♟️ Шахматы', name_en: '♟️ Chess', icon: '♟️' },
+                { id: 'checkers', name_ru: '⚫ Шашки', name_en: '⚫ Checkers', icon: '⚫' },
+                { id: 'minesweeper', name_ru: '💣 Сапёр', name_en: '💣 Minesweeper', icon: '💣' }
             ],
 
             ratings: {
                 overall: [
-                    { position: 1, name: 'Александр', score: 3850, coins: 1200 },
-                    { position: 2, name: 'Мария', score: 3620, coins: 950 },
-                    { position: 3, name: 'Иван', score: 3480, coins: 890 },
-                    { position: 4, name: 'Елена', score: 3290, coins: 750 },
-                    { position: 5, name: 'Дмитрий', score: 3100, coins: 620 },
-                    { position: 6, name: 'Ольга', score: 2950, coins: 550 },
-                    { position: 7, name: 'Сергей', score: 2780, coins: 480 },
-                    { position: 8, name: 'Анна', score: 2610, coins: 420 },
-                    { position: 9, name: 'Павел', score: 2450, coins: 380 },
-                    { position: 10, name: 'Виктор', score: 2290, coins: 320 }
+                    { position: 1, name_ru: 'Александр', name_en: 'Alexander', score: 3850, coins: 1200 },
+                    { position: 2, name_ru: 'Мария', name_en: 'Maria', score: 3620, coins: 950 },
+                    { position: 3, name_ru: 'Иван', name_en: 'Ivan', score: 3480, coins: 890 },
+                    { position: 4, name_ru: 'Елена', name_en: 'Elena', score: 3290, coins: 750 },
+                    { position: 5, name_ru: 'Дмитрий', name_en: 'Dmitry', score: 3100, coins: 620 },
+                    { position: 6, name_ru: 'Ольга', name_en: 'Olga', score: 2950, coins: 550 },
+                    { position: 7, name_ru: 'Сергей', name_en: 'Sergey', score: 2780, coins: 480 },
+                    { position: 8, name_ru: 'Анна', name_en: 'Anna', score: 2610, coins: 420 },
+                    { position: 9, name_ru: 'Павел', name_en: 'Pavel', score: 2450, coins: 380 },
+                    { position: 10, name_ru: 'Виктор', name_en: 'Victor', score: 2290, coins: 320 }
                 ],
                 sudoku: [
-                    { position: 1, name: 'Математик', score: 5200, coins: 800 },
-                    { position: 2, name: 'Логик', score: 4950, coins: 700 },
-                    { position: 3, name: 'Гений', score: 4680, coins: 600 }
+                    { position: 1, name_ru: 'Математик', name_en: 'Mathematician', score: 5200, coins: 800 },
+                    { position: 2, name_ru: 'Логик', name_en: 'Logician', score: 4950, coins: 700 },
+                    { position: 3, name_ru: 'Гений', name_en: 'Genius', score: 4680, coins: 600 }
                 ],
                 tictactoe: [
-                    { position: 1, name: 'Стратег', score: 4500, coins: 750 },
-                    { position: 2, name: 'Тактик', score: 4200, coins: 650 },
-                    { position: 3, name: 'Мастер', score: 3900, coins: 550 }
+                    { position: 1, name_ru: 'Стратег', name_en: 'Strategist', score: 4500, coins: 750 },
+                    { position: 2, name_ru: 'Тактик', name_en: 'Tactician', score: 4200, coins: 650 },
+                    { position: 3, name_ru: 'Мастер', name_en: 'Master', score: 3900, coins: 550 }
                 ],
                 chess: [
-                    { position: 1, name: 'Гроссмейстер', score: 6200, coins: 1000 },
-                    { position: 2, name: 'Мастер', score: 5800, coins: 850 },
-                    { position: 3, name: 'Король', score: 5400, coins: 700 }
+                    { position: 1, name_ru: 'Гроссмейстер', name_en: 'Grandmaster', score: 6200, coins: 1000 },
+                    { position: 2, name_ru: 'Мастер', name_en: 'Master', score: 5800, coins: 850 },
+                    { position: 3, name_ru: 'Король', name_en: 'King', score: 5400, coins: 700 }
                 ],
                 checkers: [
-                    { position: 1, name: 'Чемпион', score: 5100, coins: 900 },
-                    { position: 2, name: 'Профи', score: 4700, coins: 750 },
-                    { position: 3, name: 'Эксперт', score: 4300, coins: 600 }
+                    { position: 1, name_ru: 'Чемпион', name_en: 'Champion', score: 5100, coins: 900 },
+                    { position: 2, name_ru: 'Профи', name_en: 'Pro', score: 4700, coins: 750 },
+                    { position: 3, name_ru: 'Эксперт', name_en: 'Expert', score: 4300, coins: 600 }
                 ],
                 minesweeper: [
-                    { position: 1, name: 'Минёр', score: 4800, coins: 850 },
-                    { position: 2, name: 'Дефузер', score: 4400, coins: 700 },
-                    { position: 3, name: 'Детектив', score: 4000, coins: 550 }
+                    { position: 1, name_ru: 'Минёр', name_en: 'Miner', score: 4800, coins: 850 },
+                    { position: 2, name_ru: 'Дефузер', name_en: 'Defuser', score: 4400, coins: 700 },
+                    { position: 3, name_ru: 'Детектив', name_en: 'Detective', score: 4000, coins: 550 }
                 ]
             },
 
             shop: {
-                avatars: [
+                avatars_ru: [
                     { name: 'Гений', icon: '🧠', price: 100, desc: 'Умный аватар' },
                     { name: 'Чемпион', icon: '🏆', price: 150, desc: 'Аватар чемпиона' },
                     { name: 'Звезда', icon: '⭐', price: 200, desc: 'Звёздный аватар' },
                     { name: 'Ракета', icon: '🚀', price: 250, desc: 'Суперскоростной' }
                 ],
-                backgrounds: [
+                avatars_en: [
+                    { name: 'Genius', icon: '🧠', price: 100, desc: 'Smart avatar' },
+                    { name: 'Champion', icon: '🏆', price: 150, desc: 'Champion avatar' },
+                    { name: 'Star', icon: '⭐', price: 200, desc: 'Star avatar' },
+                    { name: 'Rocket', icon: '🚀', price: 250, desc: 'Super fast' }
+                ],
+                backgrounds_ru: [
                     { name: 'Закат', price: 180, desc: 'Переливающийся закат' },
                     { name: 'Океан', price: 200, desc: 'Волны голубого океана' },
                     { name: 'Лес', price: 150, desc: 'Зелёный лес' },
                     { name: 'Аврора', price: 220, desc: 'Северное сияние' },
                     { name: 'Лава', price: 250, desc: 'Горячая лава' },
                     { name: 'Галактика', price: 280, desc: 'Космическая галактика' }
+                ],
+                backgrounds_en: [
+                    { name: 'Sunset', price: 180, desc: 'Iridescent sunset' },
+                    { name: 'Ocean', price: 200, desc: 'Blue ocean waves' },
+                    { name: 'Forest', price: 150, desc: 'Green forest' },
+                    { name: 'Aurora', price: 220, desc: 'Northern lights' },
+                    { name: 'Lava', price: 250, desc: 'Hot lava' },
+                    { name: 'Galaxy', price: 280, desc: 'Cosmic galaxy' }
                 ]
             },
 
+            detectLanguage() {
+                const lang = navigator.language || navigator.userLanguage;
+                return lang.startsWith('ru') ? 'ru' : 'en';
+            },
+
+            t(key) {
+                return i18n[this.state.language]?.[key] || i18n.ru[key] || key;
+            },
+
+            updateTranslations() {
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    el.textContent = this.t(el.dataset.i18n);
+                });
+                
+                document.documentElement.lang = this.state.language;
+                this.renderGames();
+                this.renderRatingTabs();
+                this.renderShopTabs();
+                this.updateHeaderTitle('mainMenuScreen');
+            },
+
+            setLanguage(lang) {
+                this.state.language = lang;
+                localStorage.setItem('language', lang);
+                
+                document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+                if (event && event.target) {
+                    event.target.classList.add('active');
+                }
+                
+                this.updateTranslations();
+            },
+
             init() {
+                this.updateTranslations();
+                this.updateLanguageButtons();
                 this.renderGames();
                 this.renderShopTabs();
                 this.renderRatingTabs();
@@ -1107,16 +1283,26 @@
                 this.loadTheme();
             },
 
+            updateLanguageButtons() {
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    const lang = btn.textContent.toLowerCase() === 'ру' ? 'ru' : 'en';
+                    btn.classList.toggle('active', lang === this.state.language);
+                });
+            },
+
             renderGames() {
                 const container = document.getElementById('gamesContainer');
                 if (!container) return;
                 
-                container.innerHTML = this.games.map(game => `
-                    <button class="game-item" onclick="app.selectGame('${game.id}', '${game.name}')" aria-label="Игра ${game.name}">
-                        <div class="icon" aria-hidden="true">${game.icon}</div>
-                        <div class="name">${game.name}</div>
-                    </button>
-                `).join('');
+                container.innerHTML = this.games.map(game => {
+                    const name = this.state.language === 'ru' ? game.name_ru : game.name_en;
+                    return `
+                        <button class="game-item" onclick="app.selectGame('${game.id}', '${name}')" aria-label="Игра ${name}">
+                            <div class="icon" aria-hidden="true">${game.icon}</div>
+                            <div class="name">${name}</div>
+                        </button>
+                    `;
+                }).join('');
             },
 
             selectGame(gameId, gameName) {
@@ -1136,47 +1322,64 @@
                 this.state.difficulty = difficulty;
                 const status = document.getElementById('gameStatus');
                 if (status) {
-                    const diffNames = { easy: 'Лёгкий', medium: 'Средний', hard: 'Сложный' };
-                    status.textContent = `Уровень: ${diffNames[difficulty]}`;
+                    const diffNames = {
+                        easy: this.state.language === 'ru' ? 'Лёгкий' : 'Easy',
+                        medium: this.state.language === 'ru' ? 'Средний' : 'Medium',
+                        hard: this.state.language === 'ru' ? 'Сложный' : 'Hard'
+                    };
+                    status.textContent = `${this.state.language === 'ru' ? 'Уровень' : 'Level'}: ${diffNames[difficulty]}`;
                 }
             },
 
             playGame() {
-                const gameName = this.games.find(g => g.id === this.state.currentGame)?.name || 'Игра';
-                const modeNames = { ai: 'Робот', self: 'Сам на себя' };
-                const diffNames = { easy: 'Лёгкий', medium: 'Средний', hard: 'Сложный' };
+                const gameName = this.games.find(g => g.id === this.state.currentGame);
+                const name = this.state.language === 'ru' ? gameName.name_ru : gameName.name_en;
+                const modeNames = {
+                    ai: this.state.language === 'ru' ? 'Робот' : 'Robot',
+                    self: this.state.language === 'ru' ? 'Сам на себя' : 'Local'
+                };
+                const diffNames = {
+                    easy: this.state.language === 'ru' ? 'Лёгкий' : 'Easy',
+                    medium: this.state.language === 'ru' ? 'Средний' : 'Medium',
+                    hard: this.state.language === 'ru' ? 'Сложный' : 'Hard'
+                };
                 
-                this.updateHeaderTitle('gamePlayScreen', gameName);
+                this.updateHeaderTitle('gamePlayScreen', name);
                 this.showScreen('gamePlayScreen');
                 
                 const status = document.getElementById('gameStatus');
                 const score = document.getElementById('gameScore');
                 
                 if (status) {
-                    status.textContent = `🎮 ${gameName} (${modeNames[this.state.gameMode]})`;
+                    status.textContent = `🎮 ${name} (${modeNames[this.state.gameMode]})`;
                 }
                 if (score) {
-                    score.textContent = `📊 Сложность: ${diffNames[this.state.difficulty]}`;
+                    const levelText = this.state.language === 'ru' ? 'Сложность' : 'Difficulty';
+                    score.textContent = `📊 ${levelText}: ${diffNames[this.state.difficulty]}`;
                 }
             },
 
             newGame() {
                 const status = document.getElementById('gameStatus');
                 if (status) {
-                    status.textContent = '🎲 Новая игра начата!';
+                    status.textContent = this.state.language === 'ru' ? '🎲 Новая игра начата!' : '🎲 New game started!';
                 }
-                this.showModal('🎮', 'Игра началась!', 'Удачи в игре!');
+                const msg = this.state.language === 'ru' ? 'Удачи в игре!' : 'Good luck!';
+                this.showModal('🎮', this.state.language === 'ru' ? 'Игра началась!' : 'Game Started!', msg);
             },
 
             renderRatingTabs() {
                 const container = document.getElementById('ratingTabsContainer');
                 if (!container) return;
                 
-                container.innerHTML = this.ratingTypes.map((type, index) => `
-                    <button class="rating-tab ${index === 0 ? 'active' : ''}" onclick="app.switchRatingTab('${type.id}')" role="tab" aria-selected="${index === 0}">
-                        ${type.icon} ${type.name}
-                    </button>
-                `).join('');
+                container.innerHTML = this.ratingTypes.map((type, index) => {
+                    const name = this.state.language === 'ru' ? type.name_ru : type.name_en;
+                    return `
+                        <button class="rating-tab ${index === 0 ? 'active' : ''}" onclick="app.switchRatingTab('${type.id}')" role="tab" aria-selected="${index === 0}">
+                            ${name}
+                        </button>
+                    `;
+                }).join('');
                 
                 this.renderRatings('overall');
             },
@@ -1208,12 +1411,14 @@
                     else if (player.position === 2) positionClass = 'silver';
                     else if (player.position === 3) positionClass = 'bronze';
                     
+                    const name = this.state.language === 'ru' ? player.name_ru : player.name_en;
+                    
                     return `
                         <div class="rating-item">
                             <div class="rating-position ${positionClass}">#${player.position}</div>
                             <div class="rating-info">
-                                <div class="rating-name">${this.escapeHtml(player.name)}</div>
-                                <div class="rating-score">Очки: ${player.score}</div>
+                                <div class="rating-name">${this.escapeHtml(name)}</div>
+                                <div class="rating-score">${this.state.language === 'ru' ? 'Очки' : 'Score'}: ${player.score}</div>
                             </div>
                             <div class="rating-coins">💰 ${player.coins}</div>
                         </div>
@@ -1225,9 +1430,12 @@
                 const container = document.getElementById('shopTabsContainer');
                 if (!container) return;
                 
+                const avatarsText = this.t('avatars');
+                const backgroundsText = this.t('backgrounds');
+                
                 container.innerHTML = `
-                    <button class="shop-tab active" onclick="app.switchShopTab('avatars')" role="tab" aria-selected="true">Аватары</button>
-                    <button class="shop-tab" onclick="app.switchShopTab('backgrounds')" role="tab" aria-selected="false">Фоны</button>
+                    <button class="shop-tab active" onclick="app.switchShopTab('avatars')" role="tab" aria-selected="true">${avatarsText}</button>
+                    <button class="shop-tab" onclick="app.switchShopTab('backgrounds')" role="tab" aria-selected="false">${backgroundsText}</button>
                 `;
                 this.renderShopItems('avatars');
             },
@@ -1251,23 +1459,23 @@
                 const container = document.getElementById('shopItemsContainer');
                 if (!container) return;
                 
-                const items = this.shop[tab];
+                const key = tab === 'avatars' ? `avatars_${this.state.language}` : `backgrounds_${this.state.language}`;
+                const items = this.shop[key];
+                const buyText = this.t('buy');
+                
                 container.innerHTML = items.map((item) => {
-                    if (tab === 'avatars') {
-                        return `
-                            <div class="shop-item">
-                                <div class="item-icon">${item.icon}</div>
-                                <div class="item-info">
-                                    <div class="item-name">${this.escapeHtml(item.name)}</div>
-                                    <div class="item-desc">${this.escapeHtml(item.desc)}</div>
-                                </div>
-                                <button class="buy-btn" onclick="app.buyItem('${this.escapeHtml(item.name)}', ${item.price})">
-                                    💰 ${item.price}
-                                </button>
+                    return `
+                        <div class="shop-item">
+                            <div class="item-icon">${item.icon || ''}</div>
+                            <div class="item-info">
+                                <div class="item-name">${this.escapeHtml(item.name)}</div>
+                                <div class="item-desc">${this.escapeHtml(item.desc)}</div>
                             </div>
-                        `;
-                    }
-                    return '';
+                            <button class="buy-btn" onclick="app.buyItem('${this.escapeHtml(item.name)}', ${item.price})">
+                                💰 ${item.price}
+                            </button>
+                        </div>
+                    `;
                 }).join('');
             },
 
@@ -1281,9 +1489,10 @@
                 if (this.state.shopCoins >= price) {
                     this.state.shopCoins -= price;
                     this.updateUI();
-                    this.showModal('✅', 'Покупка', `Вы приобрели "${name}"!`);
+                    const msg = this.state.language === 'ru' ? `Вы приобрели "${name}"!` : `You purchased "${name}"!`;
+                    this.showModal('✅', this.state.language === 'ru' ? 'Покупка' : 'Purchase', msg);
                 } else {
-                    this.showModal('❌', 'Ошибка', 'Недостаточно коинов');
+                    this.showModal('❌', this.state.language === 'ru' ? 'Ошибка' : 'Error', this.state.language === 'ru' ? 'Недостаточно коинов' : 'Not enough coins');
                 }
             },
 
@@ -1310,18 +1519,18 @@
 
             updateHeaderTitle(screenId, customName = null) {
                 const titles = {
-                    mainMenuScreen: 'Умные Игры',
-                    profileScreen: 'Профиль',
-                    settingsScreen: 'Настройки',
-                    shopScreen: 'Магазин',
-                    ratingsScreen: 'Рейтинги',
-                    gameModeScreen: customName || 'Выбор режима',
-                    gamePlayScreen: customName || 'Игра'
+                    mainMenuScreen: this.state.language === 'ru' ? 'Умные Игры' : 'Smart Games',
+                    profileScreen: this.state.language === 'ru' ? 'Профиль' : 'Profile',
+                    settingsScreen: this.state.language === 'ru' ? 'Настройки' : 'Settings',
+                    shopScreen: this.state.language === 'ru' ? 'Магазин' : 'Shop',
+                    ratingsScreen: this.state.language === 'ru' ? 'Рейтинги' : 'Ratings',
+                    gameModeScreen: customName || (this.state.language === 'ru' ? 'Выбор режима' : 'Game Mode'),
+                    gamePlayScreen: customName || (this.state.language === 'ru' ? 'Игра' : 'Game')
                 };
                 
                 const title = document.getElementById('headerTitle');
                 if (title) {
-                    title.textContent = titles[screenId] || customName || 'Умные Игры';
+                    title.textContent = titles[screenId] || customName || (this.state.language === 'ru' ? 'Умные Игры' : 'Smart Games');
                 }
             },
 
@@ -1374,6 +1583,11 @@
                 
                 const profileLossesEl = document.getElementById('profileLosses');
                 if (profileLossesEl) profileLossesEl.textContent = this.state.profileLosses;
+
+                const profileNameEl = document.getElementById('profileName');
+                if (profileNameEl) {
+                    profileNameEl.textContent = this.state.language === 'ru' ? 'Умный Игрок' : 'Smart Player';
+                }
             },
 
             showModal(icon, title, text) {
